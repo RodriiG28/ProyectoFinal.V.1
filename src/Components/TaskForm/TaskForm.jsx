@@ -65,6 +65,7 @@ function TaskForm({ agregarTarea }) {
         <InputRightElement>
           {/* Botón de círculo con ícono + para agregar la tarea */}
           <Circle
+            // size={{base:'12px',md:'16px'}}
             size="16px"
             bg="rgb(255,31,91)"
             color="white"
@@ -74,7 +75,8 @@ function TaskForm({ agregarTarea }) {
             cursor="pointer"
             onClick={handleSubmit}
           >
-            <FaPlus size="8px"/>
+            {/* <FaPlus h={{base:'2',md:'10'}}/> */}
+            <FaPlus size="10px"/>
           </Circle>
         </InputRightElement>
       </InputGroup>

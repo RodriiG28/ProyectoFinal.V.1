@@ -8,7 +8,8 @@ const Main=()=>{
 
     return(				
         <Container minH={{base:'90vh',md:'86vh'}} maxW="100vw" display={'flex'} 
-        flexDirection={'column'} alignItems={'center'} justifyContent={'center'} bg={'rgb(228, 228, 228)'} > 		
+        flexDirection={'column'} alignItems={'center'} justifyContent={'center'} bg={'transparent'} > 
+        {/* // flexDirection={'column'} alignItems={'center'} justifyContent={'center'} bg={'rgb(255, 255, 255)'}> 		 */}
             <Container className='Diagonal' display={'flex'} alignContent={'center'} justifyContent={'center'}>
                 <App/></Container>
         </Container>

@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { FaCheck, FaTrash, FaEdit } from 'react-icons/fa';
 
-function TaskItem({ todo, handleTaskAction }) {
+function TaskItem({ todo, handleTaskAction, ts }) {
     // Estado para manejar la edición del título
     const [isEditing, setEditing] = useState(false);
     // Estado para almacenar el título editado
@@ -97,13 +97,26 @@ function TaskItem({ todo, handleTaskAction }) {
             onMouseLeave={() => setHovered(false)}
         >
             {/* Botón para eliminar la tarea */}
+            {isHovered && (
+                // Botón de editar visible solo en el modo de visualización
+                <IconButton
+                    icon={<FaEdit size="12px"/>}
+                    variant="ghost"
+                    color="rgb(255,31,91)"
+                    
+                    onClick={editedTitle.length > 20 ? handleDetailViewClick : handleEditClick}
+                />
+            )}
+
             <IconButton
                 icon={<FaTrash />}
                 variant="ghost"
-                color="rgba(255,31,91,0.7)"
+                // color="rgba(255,31,91,0.7)"
+                color={todo.completed?"rgba(255,31,91,0.85)":"rgba(255,31,91,0.35)"}
                 onClick={() => handleTaskAction(todo.id, 'delete')}
                 fontSize={{base:'10',md:'12',lg:'14'}}
             />
+              
             {isEditing ? ( // Modo de edición
                 <Textarea
                     value={editedTitle}
@@ -120,6 +133,7 @@ function TaskItem({ todo, handleTaskAction }) {
                 />
             ) : (
                 // Modo de visualización
+                
                 <Text 
                     textDecoration={todo.completed ? 'line-through' : 'none'}
                     textDecorationColor={todo.completed ? 'rgb(255,31,91)' : 'none'}
@@ -138,22 +152,15 @@ function TaskItem({ todo, handleTaskAction }) {
                 >
                     {truncatedTitle}
                     {/* Mostrar la fecha */}
-                    <Text fontSize={{base:'8',md:'9',lg:'10'}} color="gray.500">
-                        {todo.fecha}
+                    <Text fontSize={{base:'6',md:'7',lg:'8'}} color="rgba(255,31,91,0.8)">
+                        {/* {todo.fecha} */}
+                        {ts}
                     </Text>
                 </Text>
             )}
-            {isHovered && (
-                // Botón de editar visible solo en el modo de visualización
-                <IconButton
-                    icon={<FaEdit size="12px"/>}
-                    variant="ghost"
-                    color="rgb(255,31,91)"
-                    
-                    onClick={editedTitle.length > 28 ? handleDetailViewClick : handleEditClick}
-                />
-            )}
+                    {/* -------------- aca estuvo bt edit -- */}
             <Circle
+                // size={{base:'14px',md:'18px'}}
                 size="18px"
                 bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
                 color={todo.completed ? 'white' : 'rgb(255,31,91)'}
@@ -164,6 +171,7 @@ function TaskItem({ todo, handleTaskAction }) {
                 onClick={handleCheckClick}
                 cursor="pointer"
             >
+                {/* <FaCheck size={{base:'4px',md:'8px'}}/> */}
                 <FaCheck size="10px"/>
             </Circle>
             {isDetailView && (
@@ -172,6 +180,7 @@ function TaskItem({ todo, handleTaskAction }) {
                     isOpen={isDetailView}
                     onClose={handleCloseModal}
                     size="md"
+                    // W="90vw"
                     centerContent
                     isCentered
                     scrollBehavior="inside"
@@ -187,21 +196,19 @@ function TaskItem({ todo, handleTaskAction }) {
                             borderRadius="md"
                             w="100%"
                             fontFamily="Red Hat Display"
+                            color="rgb(255,31,91)"
                         >
-                            Detalle de Tarea
-                            {/* Mostrar la fecha en el encabezado del modal */}
-                            <Text color="gray.500" fontFamily="Red Hat Display" fontWeight="medium" fontSize="lg" flex="1" ml="8">
-                                {todo.fecha}
-                            </Text>
+                            Edit 
+                           
                         </ModalHeader>
-                        <ModalCloseButton />
+                        <ModalCloseButton color="rgb(255,31,91)"/>
                         <ModalBody
                             pb={0}
                             pt={0}
                             px={0}
                             w="100%"
                             display="flex"
-                            alignItems="center"
+                            alignContent="center"
                             justifyContent="center"
                             flexDirection="column"
                             bg="gray.50"
@@ -213,14 +220,21 @@ function TaskItem({ todo, handleTaskAction }) {
                                 color="gray.700"
                                 bg="gray.200"
                                 _placeholder={{ color: 'gray.500' }}
-                                _focus={{ bg: 'gray.200', border: 'none' }}
-                                _hover={{ bg: 'gray.200', border: 'none' }}
+                                _focus={{ bg: 'gray.100', border: 'none' }}
+                                _hover={{ bg: 'gray.100', border: 'none' }}
                                 fontSize="lg"
+                                
+                                textAlign={'left'}
                                 border="none"
                                 size="sm"
                             />
                         </ModalBody>
                         <ModalFooter>
+                             {/* Mostrar la fecha en el footer del modal */}
+                             <Text color="gray.400" fontFamily="Red Hat Display" fontWeight="medium" fontSize={{base:'10',md:'12',lg:'14'}} flex="1" ml="8" alignSelf={'left'}>
+                                {/* {todo.fecha} */}
+                                {ts}
+                            </Text>
                             {/* Botón de guardar en el modal */}
                             <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
                                 Guardar

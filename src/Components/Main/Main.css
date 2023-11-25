@@ -6,5 +6,6 @@
 .Diagonal{  /* el efecto del fondo, se puede o debe coordinar con el color de fondo del Main */
     width: 100%;
     min-height: 80vh;
-    background-image: linear-gradient(to top right, rgb(61, 109, 184) 50%, rgb(228, 228, 228) 50%);
+    background-image: linear-gradient(to top right, rgb(61, 109, 184) 50%, rgba(255, 255, 255,0) 50%);
+    /* background-image: linear-gradient(to top right, rgb(61, 109, 184) 50%, rgb(255, 255, 255) 50%); */
 }
