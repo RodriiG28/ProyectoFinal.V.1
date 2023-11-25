@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, VStack, IconButton } from '@chakra-ui/react';
-import { FaSun } from 'react-icons/fa';
-import TaskList from './Components/TaskList';
+import { ChakraProvider, VStack } from '@chakra-ui/react';
+// import { FaMoon, FaSun } from 'react-icons/fa';
+import { Header } from './Components/Header/Header.jsx'
+import TaskList from './Components/TaskList/TaskList';
+import { Footer } from './Components/Footer/Footer.jsx';
 
 // Función principal del componente App
 function App() {
@@ -9,27 +11,27 @@ function App() {
   const initialTodos = [
     {
       id: 1,
-      title: 'Realización de la tarea 1',
+      title: 'Go to market ',
       completed: false,
     },
     {
       id: 2,
-      title: 'Realización de la tarea 2',
+      title: 'Leer docu de chakra Style',
       completed: false,
     },
     {
       id: 3,
-      title: 'Realización de la tarea 3',
+      title: 'Encontrar el seguro de la granada',
       completed: false,
     },
     {
       id: 4,
-      title: 'Realización de la tarea 4',
+      title: 'Cortar pasto ',
       completed: false,
     },
     {
       id: 5,
-      title: 'Realización de la tarea 5',
+      title: 'Aprobar el curso que nos convoca',
       completed: false,
     },
   ];
@@ -78,9 +80,10 @@ function App() {
     // Proveedor de diseño Chakra para estilos y componentes
     <ChakraProvider>
       {/* Contenedor principal con alineación y padding */}
-      <VStack p={4} alignItems="center">
+      <VStack maxW={{base:'80vw' ,sm:'60vw', md:'50vw'}} p={4} alignItems="center">
         {/* Botón de sol con icono */}
-        <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" />
+        {/* <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" /> */}
+        
         {/* Componente TaskList para mostrar la lista de tareas */}
         <TaskList todos={todos} handleTaskAction={handleTaskAction} agregarTarea={agregarTarea} />
       </VStack>

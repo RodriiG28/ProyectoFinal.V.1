@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
     Flex,
     Text,
@@ -85,7 +86,7 @@ function TaskItem({ todo, handleTaskAction }) {
     return (
         <Flex
             key={todo.id}
-            w="90%" // Ajuste en el ancho del Flex
+            w="96%" // Ajuste en el ancho del Flex
             justify="space-between"
             align="center"
             _hover={{
@@ -99,8 +100,9 @@ function TaskItem({ todo, handleTaskAction }) {
             <IconButton
                 icon={<FaTrash />}
                 variant="ghost"
-                color="red.500"
+                color="rgba(255,31,91,0.7)"
                 onClick={() => handleTaskAction(todo.id, 'delete')}
+                fontSize={{base:'10',md:'12',lg:'14'}}
             />
             {isEditing ? ( // Modo de edición
                 <Textarea
@@ -114,25 +116,29 @@ function TaskItem({ todo, handleTaskAction }) {
                     border="none"
                     onKeyDown={handleKeyDown}
                     size="sm"
-                    textAlign="center"
+                    textAlign="left"
                 />
             ) : (
                 // Modo de visualización
-                <Text
+                <Text 
                     textDecoration={todo.completed ? 'line-through' : 'none'}
+                    textDecorationColor={todo.completed ? 'rgb(255,31,91)' : 'none'}
+                    
                     cursor="pointer"
-                    color={todo.completed ? 'gray.500' : 'gray.700'}
-                    fontFamily="Inter"
-                    fontWeight="medium"
-                    fontSize="lg"
+                    color={todo.completed ? 'gray.300' : 'gray.600'}
+                    fontFamily="Red Hat Display"
+                    fontWeight="700"
+                    fontSize={{base:'12',md:'13',lg:'14'}}
                     flex="1"
+                    minW={{base:'100',sm:'110',md:'120',lg:'130'}}
+                    maxW={{base:'130',sm:'130',md:'150',lg:'160'}}
                     overflowWrap="break-word"
                     onClick={() => handleTaskAction(todo.id, 'toggle')}
-                    textAlign="center"
+                    textAlign="left"
                 >
                     {truncatedTitle}
                     {/* Mostrar la fecha */}
-                    <Text fontSize="sm" color="gray.500">
+                    <Text fontSize={{base:'8',md:'9',lg:'10'}} color="gray.500">
                         {todo.fecha}
                     </Text>
                 </Text>
@@ -140,17 +146,17 @@ function TaskItem({ todo, handleTaskAction }) {
             {isHovered && (
                 // Botón de editar visible solo en el modo de visualización
                 <IconButton
-                    icon={<FaEdit />}
+                    icon={<FaEdit size="12px"/>}
                     variant="ghost"
-                    color="red.500"
-                    fontSize="lg"
+                    color="rgb(255,31,91)"
+                    
                     onClick={editedTitle.length > 28 ? handleDetailViewClick : handleEditClick}
                 />
             )}
             <Circle
-                size="24px"
-                bg={todo.completed ? 'red.500' : 'gray.300'}
-                color={todo.completed ? 'white' : 'red.500'}
+                size="18px"
+                bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
+                color={todo.completed ? 'white' : 'rgb(255,31,91)'}
                 fontSize="sm"
                 display="flex"
                 alignItems="center"
@@ -158,7 +164,7 @@ function TaskItem({ todo, handleTaskAction }) {
                 onClick={handleCheckClick}
                 cursor="pointer"
             >
-                <FaCheck />
+                <FaCheck size="10px"/>
             </Circle>
             {isDetailView && (
                 // Modal de detalle
@@ -180,10 +186,11 @@ function TaskItem({ todo, handleTaskAction }) {
                             bg="gray.50"
                             borderRadius="md"
                             w="100%"
+                            fontFamily="Red Hat Display"
                         >
                             Detalle de Tarea
                             {/* Mostrar la fecha en el encabezado del modal */}
-                            <Text color="gray.500" fontFamily="Inter" fontWeight="medium" fontSize="lg" flex="1" ml="8">
+                            <Text color="gray.500" fontFamily="Red Hat Display" fontWeight="medium" fontSize="lg" flex="1" ml="8">
                                 {todo.fecha}
                             </Text>
                         </ModalHeader>
@@ -215,7 +222,7 @@ function TaskItem({ todo, handleTaskAction }) {
                         </ModalBody>
                         <ModalFooter>
                             {/* Botón de guardar en el modal */}
-                            <Button colorScheme="green" onClick={handleSaveClick}>
+                            <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
                                 Guardar
                             </Button>
                         </ModalFooter>

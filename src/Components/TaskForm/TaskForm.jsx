@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { VStack, Input, InputGroup, InputRightElement, Circle, Text, Button } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
+import { FaPlus } from 'react-icons/fa';
 
 function TaskForm({ agregarTarea }) {
   // Estado para manejar el contenido del input
@@ -13,7 +14,7 @@ function TaskForm({ agregarTarea }) {
     e.preventDefault();
     // Validar que el contenido no esté vacío
     if (contenido.trim() === '') {
-      setError('Por favor, ingresa algo antes de agregar una tarea.');
+      setError('Error, debe ingresar algo.');
       return;
     }
 
@@ -42,42 +43,43 @@ function TaskForm({ agregarTarea }) {
 
   // Renderizar el componente
   return (
-    <VStack alignItems="center" spacing={4} mb={4}>
+    <VStack alignItems="center" spacing={4} mb={4} mt={4}>
       {/* Grupo de input con ícono de círculo y botón de agregar */}
       <InputGroup>
         <Input
           variant="filled"
           borderRadius="20px"
-          placeholder="Agregar tarea..."
+          textAlign={'left'}
+          fontSize={'10px'}
+          fontFamily={'Red Hat Display'}
+          placeholder="Escriba algo"
           value={contenido}
           onChange={(e) => setContenido(e.target.value)}
-          color="gray.700"
-          bg="gray.200"
-          _placeholder={{ color: 'gray.500' }}
+          color="gray.500"
+          _placeholder={{ color: 'gray.300' }}
           _focus={{ bg: 'gray.200', border: 'none' }}
           _hover={{ bg: 'gray.200', border: 'none' }}
           border="none"
           onKeyDown={handleKeyDown} // Manejar la tecla "Enter"
         />
         <InputRightElement>
-          {/* Botón de círculo con el símbolo "+" para agregar la tarea */}
+          {/* Botón de círculo con ícono + para agregar la tarea */}
           <Circle
-            size="30px"
-            bg="red.500"
+            size="16px"
+            bg="rgb(255,31,91)"
             color="white"
-            fontSize="2xl"
             display="flex"
             alignItems="center"
             justifyContent="center"
             cursor="pointer"
             onClick={handleSubmit}
           >
-            +
+            <FaPlus size="8px"/>
           </Circle>
         </InputRightElement>
       </InputGroup>
       {/* Mostrar mensaje de error si existe */}
-      {error && <Text color="red.500">{error}</Text>}
+      {error && <Text fontFamily="Red Hat Display" fontSize={{base:'8',md:'10'}} color="rgb(255,31,91)">{error}</Text>}
     </VStack>
   );
 }

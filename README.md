@@ -1,3 +1,72 @@
+
+
+
+<!-- ## Indice y referencias
+1. [Información general](#información-general)
+2. [Tecnologías](#tecnologías)
+3. [Instalación](#instalacion)
+4. [Collaboration](#collaboration)
+5. [FAQs](#faqs)
+### Informacíon general
+
+***
+De que se trata lo que hicimos, por que y para que, con un lindo uso de vocabulario, chachara acertada y un tinte profesional aunque sin dejar de nombrar que es un trabajo de entrega para un curso y que tenemos ideas que esperamos poder implementar en futuras versiones
+***
+##### * Consiga y objetivos - 
+Consigna
+Crear una aplicación web utilizando React que permita gestionar una lista de tareas. La
+aplicación deberá hacer uso de componentes funcionales, el hook useState para el manejo del
+estado, el hook useEffect para realizar efectos secundarios, y eventos para interactuar con el
+usuario
+##### Nuestros deseos y desafíos
+lorem chachara ipsum profilis bacteriuslorem chachara ipsum profilis bacteriuslorem chachara ipsum profilis bacteriuslorem chachara ipsum profilis bacteriuslorem chachara ipsum profilis bacterius
+***
+### Así nos vemos :) (por ahora...)
+![palRdm1](https://i.imgur.com/2OKW1Im.png)
+## Tecnologías
+***
+Aprendimos y utilizamos:
+* [React](https://es.react.dev/): versión 18.2.0
+* [Vite](https://vitejs.dev/guide/): versión 4.4.5
+* [Chakra UI](https://chakra-ui.com/): versión 2.8.2
+* [Framer Motion](https://www.framer.com/motion/): versión 10.16.5
+* [GH-pages](https://www.npmjs.com/package/gh-pages): versión 6.0.0
+## Instalación
+***
+A little intro about the installation. 
+```
+$ git clone https://aeditar.com NO OLVIDAR!! <--
+$ cd ../path/to/the/file
+$ npm install
+$ npm start
+```
+Side information: To use the application in a special environment use ```lorem ipsum``` to start
+## Collaboration
+***
+Give instructions on how to collaborate with your project.
+> Maybe you want to write a quote in this part. 
+> It should go over several rows?
+> This is how you do it.
+## FAQs
+***
+A list of frequently asked questions
+1. **This is a question in bold**
+Answer of the first question with _italic words_. 
+2. __Second question in bold__ 
+To answer this question we use an unordered list:
+* First point
+* Second Point
+* Third point
+3. **Third question in bold**
+Answer of the third question with *italic words*.
+4. **Fourth question in bold**
+
+ -->
+
+
+
+<!-- Readme v1.0
+
 react vite, chackra iu, icons, nanoid
 
 
@@ -41,4 +110,4 @@ Elimina una tarea haciendo clic en el ícono de basura.
 ¡Listo! Ahora estás listo para gestionar tus tareas de manera eficiente.
 
 Contribuciones
-Si encuentras algún problema o tienes ideas para mejorar la aplicación, ¡siéntete libre de contribuir abriendo un issue o enviando un pull request!
+Si encuentras algún problema o tienes ideas para mejorar la aplicación, ¡siéntete libre de contribuir abriendo un issue o enviando un pull request! -->
