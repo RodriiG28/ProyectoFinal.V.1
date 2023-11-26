@@ -84,7 +84,7 @@ function App() {
       {/* <VStack maxW={{base:'80vw' ,sm:'60vw', md:'50vw'}} p={4} alignItems="center"> */}
       <VStack maxW={{ base: '82vw', sm: '60vw', md:'46vw', lg: '34vw', xl: '32vw' }} 
               minW={{ base: '75vw', sm: '46vw', md:'34vw', lg: '28vw', xl: '24vw' }}
-      p={1} alignItems="space-between" align={'center'}>
+      p={1} justifyContent={'center'}>
       
         {/* Botón de sol con icono */}
         {/* <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" onClick={traer}/>

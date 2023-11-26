@@ -73,11 +73,11 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
       
       p="0"
       borderRadius="12px"
-      w="100%"
+      w="98%"
       maxW={{ base: '90vw', sm: '80vw', md:'75vw', lg: '70vw', xl: '55vw' }}
-      minH="60vh"
+      minH="50vh"
       alignItems="center"
-      justify={'space-between'}
+      justify={'space-around'}
       bg="gray.50"
       
       overflowY="auto"
@@ -112,11 +112,19 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
             <Text fontSize={{base:'8px',sm:'9px',md:'11px',lg:'12px'}}>Puede agregar o descansar.</Text>
           </Badge>
         ) : (
-             
-          // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1
-          todos.map((todo) => (
-            <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
-          ))
+
+          <Grid>
+          {/* // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1 */}
+          {todos.map((todo) => (
+            <GridItem>
+              <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
+            </GridItem>
+          ))}
+          </Grid>   
+          // // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1
+          // todos.map((todo) => (
+          //   <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
+          // ))
         )}
       </VStack>
       {/* Componente TaskForm para agregar nuevas tareas */}
