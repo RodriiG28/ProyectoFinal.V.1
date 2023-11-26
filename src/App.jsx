@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, VStack } from '@chakra-ui/react';
-// import { FaMoon, FaSun } from 'react-icons/fa';
+import { ChakraProvider, VStack, IconButton } from '@chakra-ui/react';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { Header } from './Components/Header/Header.jsx'
 import TaskList from './Components/TaskList/TaskList';
 import { Footer } from './Components/Footer/Footer.jsx';
@@ -10,34 +10,35 @@ function App() {
   // Definición de las tareas iniciales utilizando el estado inicial
   const initialTodos = [
     {
-      id: 1,
-      title: 'Go to market ',
-      completed: false,
-    },
-    {
-      id: 2,
-      title: 'Leer docu de chakra Style',
-      completed: false,
-    },
-    {
-      id: 3,
-      title: 'Encontrar el seguro de la granada',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'Cortar pasto ',
-      completed: false,
-    },
-    {
-      id: 5,
-      title: 'Aprobar el curso que nos convoca',
-      completed: false,
-    },
-  ];
+    id: 1,
+    title: 'Go to market ',
+    completed: false,
+  },
+  {
+    id: 2,
+    title: 'Leer docu de chakra Style',
+    completed: false,
+  },]
+  
+  // SECCION LOCALSTORAGE  <----------------------------------- !
+
+  // let pkgpara = localStorage.setItem("tarea", JSON.stringify(todos))
+  // let pkgde = JSON.parse(localStorage.getItem("tarea", JSON.stringify(todos)))
+
+  // 
+  // const traer = () => {
+  //   pkgde? console.log({pkgde}) : console.log("No hay entradas")
+  // }
+   
+  // const mandar =() =>{
+  //   pkgpara? console.log({pkgpara}) : console.log("Nada para enviar")
+  // }
 
   // Declaración del estado para almacenar la lista de tareas
   const [todos, setTodos] = useState(initialTodos);
+
+
+
 
   // Efecto secundario para imprimir en la consola cuando la lista de tareas cambia
   useEffect(() => {
@@ -86,8 +87,8 @@ function App() {
       p={1} alignItems="space-between" align={'center'}>
       
         {/* Botón de sol con icono */}
-        {/* <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" /> */}
-        
+        {/* <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" onClick={traer}/>
+        <IconButton icon={<FaMoon />} isRound size='lg' alignSelf='flex-end' color="yellow.500" onClick={mandar}/> */}
         {/* Componente TaskList para mostrar la lista de tareas */}
         <TaskList todos={todos} handleTaskAction={handleTaskAction} agregarTarea={agregarTarea} />
       </VStack>

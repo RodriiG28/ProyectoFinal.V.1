@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { FaCheck, FaTrash, FaEdit } from 'react-icons/fa';
 
 import {
     Flex,
+    Box,
+    HStack,
+    VStack,
     Text,
     Circle,
     IconButton,
@@ -14,8 +18,9 @@ import {
     ModalCloseButton,
     Textarea,
     Button,
+    GridItem,
+    Spacer,
 } from '@chakra-ui/react';
-import { FaCheck, FaTrash, FaEdit } from 'react-icons/fa';
 
 function TaskItem({ todo, handleTaskAction, ts }) {
     // Estado para manejar la edición del título
@@ -84,68 +89,79 @@ function TaskItem({ todo, handleTaskAction, ts }) {
 
     // Renderizar el componente
     return (
-        <Flex
-            key={todo.id}
-            w="96%" // Ajuste en el ancho del Flex
-            justify="space-between"
-            align="center"
-            _hover={{
-                bg: 'gray.100',
-                borderRadius: 'md',
-            }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            {/* Botón para eliminar la tarea */}
-            {isHovered && (
-                // Botón de editar visible solo en el modo de visualización
-                <IconButton
-                    icon={<FaEdit size="12px"/>}
-                    variant="ghost"
-                    color="rgb(255,31,91)"
-                    
-                    onClick={editedTitle.length > 20 ? handleDetailViewClick : handleEditClick}
-                />
-            )}
 
-            <IconButton
-                icon={<FaTrash />}
+        <HStack
+            key={todo.id}
+            w="94%" // Ajuste en el ancho del Flex
+            // gap={2}
+            alignContent={'center'}
+            display={'flex'}
+            direction={'row'}
+            //justify={'space-between'}
+            mx={3}>
+            <Box w={{base:'8%',sm:'16%'}} h={{base:'50',sm:'10'}} display={'flex'} flexDir={{base:'column', sm:'row'}} alignSelf={'left'}>
+            {/* <Box w={{base:'8',sm:'14'}} h={{base:'50',sm:'10'}} display={'flex'} flexDir={{base:'column', sm:'row'}}> */}
+
+                <IconButton
+                // m="-2 -5"
+                // m={{base:'-2 -5',sm:'-5 -2'}}
+                icon={<FaEdit />}
+                size={{base:'xs',sm:'sm',md:'md'}}
                 variant="ghost"
-                // color="rgba(255,31,91,0.7)"
-                color={todo.completed?"rgba(255,31,91,0.85)":"rgba(255,31,91,0.35)"}
-                onClick={() => handleTaskAction(todo.id, 'delete')}
-                fontSize={{base:'10',md:'12',lg:'14'}}
-            />
-              
+                outlineOffset={-10}
+                mr={{base:'0',sm:'-3'}}
+                color="rgb(255,31,91)"
+                onClick={editedTitle.length > 2 ? handleDetailViewClick : handleEditClick}/>
+                 
+                <IconButton
+                    icon={<FaTrash />}
+                    // m="-1 -5"
+                    // m={{base:'-3 -5',sm:'-5 -3'}}
+                    size={{base:'xs',sm:'sm',md:'md'}}
+                    variant="ghost"
+                    outlineOffset={-10}
+                    // color="rgba(255,31,91,0.7)"
+                    color={todo.completed?"rgba(255,31,91,0.85)":"rgba(255,31,91,0.35)"}
+                    onClick={() => handleTaskAction(todo.id, 'delete')}
+                    // fontSize={{base:'10',md:'12',lg:'14'}}
+                />
+
+            </Box>  
+            
             {isEditing ? ( // Modo de edición
+            <Box  w={{base:'80%',sm:'70%'}}>
                 <Textarea
                     value={editedTitle}
                     onChange={(e) => setEditedTitle(e.target.value)}
-                    color="gray.700"
-                    bg="gray.200"
+                    rows="2"
+                    color="rgba(255,31,91,0.7)"
+                    focusBorderColor='red.300'
+                    fontFamily="Red Hat Display"
+                    fontSize={{base:'12',md:'13',lg:'14'}}
+                    bg="transparent"
                     _placeholder={{ color: 'gray.500' }}
-                    _focus={{ bg: 'gray.200', border: 'none' }}
-                    _hover={{ bg: 'gray.200', border: 'none' }}
-                    border="none"
+                    //_focus={{ bg: 'gray.200', border: 'none' }}
+                    //border="none"
                     onKeyDown={handleKeyDown}
                     size="sm"
                     textAlign="left"
                 />
-            ) : (
-                // Modo de visualización
-                
+            </Box>
+            ) : (  
+            <Box w={{base:'85%',sm:'75%'}}>    
                 <Text 
                     textDecoration={todo.completed ? 'line-through' : 'none'}
                     textDecorationColor={todo.completed ? 'rgb(255,31,91)' : 'none'}
-                    
                     cursor="pointer"
+                    ml={2}
                     color={todo.completed ? 'gray.300' : 'gray.600'}
                     fontFamily="Red Hat Display"
                     fontWeight="700"
                     fontSize={{base:'12',md:'13',lg:'14'}}
                     flex="1"
-                    minW={{base:'100',sm:'110',md:'120',lg:'130'}}
-                    maxW={{base:'130',sm:'130',md:'150',lg:'160'}}
+                    w='full'
+                    // minW={{base:'110',sm:'120',md:'140',lg:'150'}}
+                    // maxW={{base:'140',sm:'150',md:'170',lg:'180'}}
                     overflowWrap="break-word"
                     onClick={() => handleTaskAction(todo.id, 'toggle')}
                     textAlign="left"
@@ -157,94 +173,274 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                         {ts}
                     </Text>
                 </Text>
-            )}
-                    {/* -------------- aca estuvo bt edit -- */}
-            <Circle
-                // size={{base:'14px',md:'18px'}}
-                size="18px"
-                bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
-                color={todo.completed ? 'white' : 'rgb(255,31,91)'}
-                fontSize="sm"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                onClick={handleCheckClick}
-                cursor="pointer"
-            >
-                {/* <FaCheck size={{base:'4px',md:'8px'}}/> */}
-                <FaCheck size="10px"/>
-            </Circle>
-            {isDetailView && (
-                // Modal de detalle
-                <Modal
-                    isOpen={isDetailView}
-                    onClose={handleCloseModal}
-                    size="md"
-                    // W="90vw"
-                    centerContent
-                    isCentered
-                    scrollBehavior="inside"
-                    motionPreset="scale"
-                    preserveScrollBarGap
+            </Box>        
+            )} 
+            
+            <Box w="10%">
+                <Circle
+                    // size={{base:'14px',md:'18px'}}
+                    size="18px"
+                    
+                    bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
+                    color={todo.completed ? 'white' : 'rgb(255,31,91)'}
+                    fontSize="sm"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    onClick={handleCheckClick}
+                    cursor="pointer"
                 >
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader
-                            display="flex"
-                            justifyContent="space-between"
-                            bg="gray.50"
-                            borderRadius="md"
-                            w="100%"
-                            fontFamily="Red Hat Display"
-                            color="rgb(255,31,91)"
-                        >
-                            Edit 
-                           
-                        </ModalHeader>
-                        <ModalCloseButton color="rgb(255,31,91)"/>
-                        <ModalBody
-                            pb={0}
-                            pt={0}
-                            px={0}
-                            w="100%"
-                            display="flex"
-                            alignContent="center"
-                            justifyContent="center"
-                            flexDirection="column"
-                            bg="gray.50"
-                        >
-                            {/* Textarea para editar el título en el modal */}
-                            <Textarea
-                                value={editedTitle}
-                                onChange={(e) => setEditedTitle(e.target.value)}
-                                color="gray.700"
-                                bg="gray.200"
-                                _placeholder={{ color: 'gray.500' }}
-                                _focus={{ bg: 'gray.100', border: 'none' }}
-                                _hover={{ bg: 'gray.100', border: 'none' }}
-                                fontSize="lg"
-                                
-                                textAlign={'left'}
-                                border="none"
-                                size="sm"
-                            />
-                        </ModalBody>
-                        <ModalFooter>
-                             {/* Mostrar la fecha en el footer del modal */}
-                             <Text color="gray.400" fontFamily="Red Hat Display" fontWeight="medium" fontSize={{base:'10',md:'12',lg:'14'}} flex="1" ml="8" alignSelf={'left'}>
-                                {/* {todo.fecha} */}
-                                {ts}
-                            </Text>
-                            {/* Botón de guardar en el modal */}
-                            <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
-                                Guardar
-                            </Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal>
-            )}
-        </Flex>
+                    {/* <FaCheck size={{base:'4px',md:'8px'}}/> */}
+                    <FaCheck size="10px"/>
+                </Circle>
+            </Box>    
+        {isDetailView && (
+            // Modal de detalle
+            <Modal
+                isOpen={isDetailView}
+                onClose={handleCloseModal}
+                size="md"
+                // W="90vw"
+                centerContent
+                isCentered
+                scrollBehavior="inside"
+                motionPreset="scale"
+                preserveScrollBarGap
+            >
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader
+                        display="flex"
+                        justifyContent="space-between"
+                        bg="rgb(255,31,91)"
+                        borderTopRadius="md"
+                        w="100%"
+                        fontFamily="Red Hat Display"
+                        color="whitesmoke"
+                    >
+                        Editar +   
+                    </ModalHeader>
+                    <ModalCloseButton color="whitesmoke"/>
+                    <ModalBody
+                        pb={0}
+                        pt={0}
+                        w="100%"
+                        px="6"
+                        my="4"
+                        display="flex"
+                        alignContent="center"
+                        justifyContent="center"
+                        flexDirection="column"
+                        
+                    >
+                        {/* Textarea para editar el título en el modal */}
+                        <Textarea
+                            value={editedTitle}
+                            onChange={(e) => setEditedTitle(e.target.value)}
+                            color="gray.700"
+                            bg="gray.200"
+                            
+                            _placeholder={{ color: 'gray.500' }}
+                            _focus={{ bg: 'gray.100', border: 'none' }}
+                            _hover={{ bg: 'gray.100', border: 'none' }}
+                            fontSize="lg"
+                            
+                            textAlign={'left'}
+                            border="none"
+                            size="sm"
+                        />
+                    </ModalBody>
+                    <ModalFooter>
+                         {/* Mostrar la fecha en el footer del modal */}
+                         <Text color="gray.400" fontFamily="Red Hat Display" fontWeight="medium" fontSize={{base:'10',md:'12',lg:'14'}} flex="1" ml="8" alignSelf={'left'}>
+                            {/* {todo.fecha} */}
+                            {ts}
+                        </Text>
+                        {/* Botón de guardar en el modal */}
+                        <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
+                            Guardar
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+            
+        )}
+        </HStack>
     );
 }
 
-export default TaskItem;
+export default TaskItem;        
+
+
+
+    //-------------------------- Acá cambio "fuerte" de estructura ----------------------------------------    
+    //     <Flex
+    //     key={todo.id}
+    //     w="96%" // Ajuste en el ancho del Flex
+    //     gap={2}
+    //     align="center"
+    //     display={'flex'}
+    //     direction={'row'}   
+    //     // _hover={{
+    //     //     bg: 'gray.100',
+    //     //     borderRadius: 'md',
+    //     // }}
+    //     // onMouseEnter={() => setHovered(true)}
+    //     // onMouseLeave={() => setHovered(false)}
+    // >
+    //     {/* Botón para eliminar la tarea */}
+    //     {/* {isHovered && ( */}
+    //         {/* Botón de editar visible  */}
+    //     <Box display={'flex'} justifyContent={'row'}
+    //     alignSelf={'flex-start'} maxW={'20'}>
+            
+    //             <IconButton
+    //             icon={<FaEdit size="12px"/>}
+    //             variant="ghost"
+    //             color="rgb(255,31,91)"
+    //             onClick={editedTitle.length > 20 ? handleDetailViewClick : handleEditClick}/>
+    //          {/*  } */}
+            
+    //         <IconButton
+    //             icon={<FaTrash />}
+    //             variant="ghost"
+    //             // color="rgba(255,31,91,0.7)"
+    //             color={todo.completed?"rgba(255,31,91,0.85)":"rgba(255,31,91,0.35)"}
+    //             onClick={() => handleTaskAction(todo.id, 'delete')}
+    //             fontSize={{base:'10',md:'12',lg:'14'}}
+    //         />
+            
+    //     </Box>  
+    //     {/* {isEditing ? ( // Modo de edición
+    //         <Textarea
+    //             value={editedTitle}
+    //             onChange={(e) => setEditedTitle(e.target.value)}
+    //             color="gray.700"
+    //             bg="gray.200"
+    //             _placeholder={{ color: 'gray.500' }}
+    //             _focus={{ bg: 'gray.200', border: 'none' }}
+    //             _hover={{ bg: 'gray.200', border: 'none' }}
+    //             border="none"
+    //             onKeyDown={handleKeyDown}
+    //             size="sm"
+    //             textAlign="left"
+    //         />
+    //     ) : ( */} 
+    //     {/* // Modo de visualización */}
+        
+    //         <Text 
+    //             textDecoration={todo.completed ? 'line-through' : 'none'}
+    //             textDecorationColor={todo.completed ? 'rgb(255,31,91)' : 'none'}
+    //             cursor="pointer"
+    //             color={todo.completed ? 'gray.300' : 'gray.600'}
+    //             fontFamily="Red Hat Display"
+    //             fontWeight="700"
+    //             fontSize={{base:'12',md:'13',lg:'14'}}
+    //             flex="1"
+    //             minW={{base:'100',sm:'110',md:'120',lg:'130'}}
+    //             maxW={{base:'130',sm:'130',md:'150',lg:'160'}}
+    //             overflowWrap="break-word"
+    //             onClick={() => handleTaskAction(todo.id, 'toggle')}
+    //             textAlign="left"
+    //         >
+    //             {truncatedTitle}
+    //             {/* Mostrar la fecha */}
+    //             <Text fontSize={{base:'6',md:'7',lg:'8'}} color="rgba(255,31,91,0.8)">
+    //                 {/* {todo.fecha} */}
+    //                 {ts}
+    //             </Text>
+    //         </Text>
+        
+    //     {/* )} */}
+    //             {/* -------------- acá estuvo bt edit -- */}
+        
+    //         <Circle
+    //             // size={{base:'14px',md:'18px'}}
+    //             size="18px"
+    //             bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
+    //             color={todo.completed ? 'white' : 'rgb(255,31,91)'}
+    //             fontSize="sm"
+    //             display="flex"
+    //             alignItems="center"
+    //             justifyContent="center"
+    //             onClick={handleCheckClick}
+    //             cursor="pointer"
+    //         >
+    //             {/* <FaCheck size={{base:'4px',md:'8px'}}/> */}
+    //             <FaCheck size="10px"/>
+    //         </Circle>
+        
+    //     {isDetailView && (
+    //         // Modal de detalle
+    //         <Modal
+    //             isOpen={isDetailView}
+    //             onClose={handleCloseModal}
+    //             size="md"
+    //             // W="90vw"
+    //             centerContent
+    //             isCentered
+    //             scrollBehavior="inside"
+    //             motionPreset="scale"
+    //             preserveScrollBarGap
+    //         >
+    //             <ModalOverlay />
+    //             <ModalContent>
+    //                 <ModalHeader
+    //                     display="flex"
+    //                     justifyContent="space-between"
+    //                     bg="rgb(255,31,91)"
+    //                     borderTopRadius="md"
+    //                     w="100%"
+    //                     fontFamily="Red Hat Display"
+    //                     color="whitesmoke"
+    //                 >
+    //                     Editar
+                       
+    //                 </ModalHeader>
+    //                 <ModalCloseButton color="whitesmoke"/>
+    //                 <ModalBody
+    //                     pb={0}
+    //                     pt={0}
+    //                     w="100%"
+    //                     px="6"
+    //                     my="4"
+    //                     display="flex"
+    //                     alignContent="center"
+    //                     justifyContent="center"
+    //                     flexDirection="column"
+                        
+    //                 >
+    //                     {/* Textarea para editar el título en el modal */}
+    //                     <Textarea
+    //                         value={editedTitle}
+    //                         onChange={(e) => setEditedTitle(e.target.value)}
+    //                         color="gray.700"
+    //                         bg="gray.200"
+                            
+    //                         _placeholder={{ color: 'gray.500' }}
+    //                         _focus={{ bg: 'gray.100', border: 'none' }}
+    //                         _hover={{ bg: 'gray.100', border: 'none' }}
+    //                         fontSize="lg"
+                            
+    //                         textAlign={'left'}
+    //                         border="none"
+    //                         size="sm"
+    //                     />
+    //                 </ModalBody>
+    //                 <ModalFooter>
+    //                      {/* Mostrar la fecha en el footer del modal */}
+    //                      <Text color="gray.400" fontFamily="Red Hat Display" fontWeight="medium" fontSize={{base:'10',md:'12',lg:'14'}} flex="1" ml="8" alignSelf={'left'}>
+    //                         {/* {todo.fecha} */}
+    //                         {ts}
+    //                     </Text>
+    //                     {/* Botón de guardar en el modal */}
+    //                     <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
+    //                         Guardar
+    //                     </Button>
+    //                 </ModalFooter>
+    //             </ModalContent>
+    //         </Modal>
+    //     )}
+    //     </Flex>
+    
+

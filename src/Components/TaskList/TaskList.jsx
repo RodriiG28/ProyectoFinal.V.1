@@ -107,12 +107,13 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           <Badge colorScheme="red" p="4"  borderRadius="lg"  fontFamily="Red Hat Display" alignSelf="center">
             <HStack justify={'space-around'} fontSize={{base:'24px',sm:'30px',md:'34px',lg:'38px'}}><GrStatusGood color='green' /> 
               <PiSmileyWinkBold color="rgb(255,31,91)" />
-              <PiBeerSteinBold color='whitesmoke' /></HStack>
+              <PiBeerSteinBold color='maroon' /></HStack>
             <Text mt={2} fontSize={{base:'10px',sm:'11px',md:'13px',lg:'14px'}}>Sin pendientes, bravo!</Text> 
             <Text fontSize={{base:'8px',sm:'9px',md:'11px',lg:'12px'}}>Puede agregar o descansar.</Text>
           </Badge>
         ) : (
-          // Mapeo de cada tarea para mostrarla con el componente TaskItem
+             
+          // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1
           todos.map((todo) => (
             <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
           ))
