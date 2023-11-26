@@ -93,9 +93,9 @@ function TaskItem({ todo, handleTaskAction, ts }) {
         <GridItem>
             <HStack
                 key={todo.id}
-                w="94%" // Ajuste en el ancho del Flex
+                w="90%" // Ajuste en el ancho del Flex
                 // gap={2}
-                alignContent={'center'}
+                alignSelf={'center'}
                 display={'flex'}
                 direction={'row'}
                 justify={'space-around'}

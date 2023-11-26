@@ -73,7 +73,7 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
       
       p="0"
       borderRadius="12px"
-      w="98%"
+      w="100%"
       maxW={{ base: '90vw', sm: '80vw', md:'75vw', lg: '70vw', xl: '55vw' }}
       minH="50vh"
       alignItems="center"
@@ -113,7 +113,7 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           </Badge>
         ) : (
 
-          <Grid>
+          <Grid templateColumns='repeat(1 , 1fr)'>
           {/* // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1 */}
           {todos.map((todo) => (
             <GridItem>
