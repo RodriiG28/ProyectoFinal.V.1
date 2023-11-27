@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { FaCheck, FaTrash, FaEdit } from 'react-icons/fa';
 
 import {
-    Flex,
     Box,
     HStack,
-    VStack,
     Text,
     Circle,
     IconButton,
@@ -19,7 +17,6 @@ import {
     Textarea,
     Button,
     GridItem,
-    Spacer,
 } from '@chakra-ui/react';
 
 function TaskItem({ todo, handleTaskAction, ts }) {
@@ -215,7 +212,7 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                             fontFamily="Red Hat Display"
                             color="whitesmoke"
                         >
-                            Editar +   
+                            <Text>Editar +</Text>
                         </ModalHeader>
                         <ModalCloseButton color="whitesmoke"/>
                         <ModalBody
@@ -255,7 +252,7 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                             </Text>
                             {/* Botón de guardar en el modal */}
                             <Button bg="rgb(255,31,91)" color={'whitesmoke'} fontFamily="Red Hat Display" _hover={{ bg: 'rgba(255,31,91,0.6)', border: 'none' }} onClick={handleSaveClick}>
-                                Guardar
+                                <Text>Guardar</Text>
                             </Button>
                         </ModalFooter>
                     </ModalContent>

@@ -11,14 +11,26 @@ function App() {
   const initialTodos = [
     {
     id: 1,
-    title: 'Go to market ',
-    completed: false,
+    title: 'Entregar Trabajo Final antes de las 19hs el dia 27/11/23 ',
+    completed: true,
   },
   {
     id: 2,
-    title: 'Leer docu de chakra Style',
+    title: 'Corroborar componentes y funcionalidades',
     completed: false,
-  },]
+  },
+{
+    id: 3,
+    title: 'Pensar futuras funcionalidades',
+    completed: false,
+},
+{
+    id: 4,
+    title: 'Descafeinizar el café',
+    completed: false,
+}
+
+]
   
    // Declaración del estado para almacenar la lista de tareas
    const [todos, setTodos] = useState(initialTodos);

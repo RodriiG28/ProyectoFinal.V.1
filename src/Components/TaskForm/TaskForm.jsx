@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VStack, Input, InputGroup, InputRightElement, Circle, Text, Button } from '@chakra-ui/react';
+import { VStack, Input, InputGroup, InputRightElement, Circle, Text} from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { FaPlus } from 'react-icons/fa';
 
@@ -45,7 +45,7 @@ function TaskForm({ agregarTarea }) {
   return (
     <VStack alignItems="center" spacing={4} mb={4} mt={4}>
       {/* Grupo de input con ícono de círculo y botón de agregar */}
-      <InputGroup>
+      <InputGroup w="80%">
         <Input
           variant="filled"
           borderRadius="20px"
@@ -53,15 +53,17 @@ function TaskForm({ agregarTarea }) {
           fontSize={'10px'}
           fontFamily={'Red Hat Display'}
           placeholder="Escriba algo"
+          name = "input"
           overflowWrap="break-word"
           value={contenido}
           onChange={(e) => setContenido(e.target.value)}
           color="gray.500"
+          bg={'gray.100'}
           _placeholder={{ color: 'gray.300' }}
           _focus={{ bg: 'gray.200', border: 'none' }}
           _hover={{ bg: 'gray.200', border: 'none' }}
           border="none"
-          onKeyDown={handleKeyDown} // Manejar la tecla "Enter"
+          onKeyDown={handleKeyDown}
         />
         <InputRightElement>
           {/* Botón de círculo con ícono + para agregar la tarea */}
