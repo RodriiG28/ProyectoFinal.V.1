@@ -1,5 +1,5 @@
-import React from 'react';
-import { VStack, Text, Badge, HStack, Container, Grid, GridItem, Box } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { VStack, Text, Badge, HStack, Container, Grid, GridItem, Box, Checkbox,Flex,useBreakpointValue } from '@chakra-ui/react';
 import TaskItem from '../TaskItem/TaskItem';
 import TaskForm from '../TaskForm/TaskForm';
 import { GrStatusGood } from "react-icons/gr";
@@ -30,6 +30,21 @@ const trashIconSvg = (
 );
 
 function TaskList({ todos, handleTaskAction, agregarTarea }) {
+  const [showCompleted, setShowCompleted] = useState(false);
+  const [showUncompleted, setShowUncompleted] = useState(false);
+
+  const filteredTodos = todos.filter((todo) => {
+    if (showCompleted && showUncompleted) {
+      return true; // Mostrar todas las tareas
+    } else if (showCompleted) {
+      return todo.completed;
+    } else if (showUncompleted) {
+      return !todo.completed;
+    }
+    return true; // Si ambos checkboxes están desactivados, mostrar todas las tareas
+  });
+
+  
   // Obtener la fecha actual
   const currentDate = new Date();
   // no permanente  ----- Date time zone -----
@@ -63,6 +78,15 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
     weekday: 'long',
   }).format(currentDate);
 
+  const checkboxProps = {
+    borderColor: 'red',
+    fontFamily: 'Red Hat Display',
+    color: 'red',
+    alignItems: 'center',
+    fontSize: useBreakpointValue({ base: '10px', sm: '12px', md: '14px' }),
+    marginX: useBreakpointValue({ base: 2, sm: 4, md: 6, lg: 8, xl: 10 }),
+  };
+
   return (
     // Contenedor principal de la lista de tareas
     <VStack
@@ -79,7 +103,7 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
       overflowY="auto"
     >
       {/* Encabezado de la lista con la fecha actual */}
-      <HStack w="100%" bg="rgb(255,31,91)" p="1" mb={'6'}>
+      <HStack w="100%" bg="rgb(255,31,91)" p="2" mb={'2'}>
         <Container color={'white'} maxH={'40px'} >
           {/* Un Grid para lograr la estructura y comportamiento deseado para el "header" de nuestra TDlist */}
           <Grid templateRows='repeat(1, 1fr)' templateColumns='repeat(5, 1fr)'
@@ -87,14 +111,44 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
             <GridItem colSpan={1} colStart={1} colEnd={1} rowStart={1} >
               <Text fontSize={'26'}>{currentDate.getDate()}</Text></GridItem>
             <GridItem colSpan={1} colStart={2} colEnd={2} rowStart={1} textAlign={'initial'}>
-              <Text fontSize={'10'}>{mes}<Text mt={'-0.5'} fontSize={'9'}>{currentDate.getFullYear()}</Text></Text></GridItem>
+              <Text fontSize={'12'}>{mes}<Text mt={'-0.5'} fontSize={'9'}>{currentDate.getFullYear()}</Text></Text></GridItem>
             <GridItem colStart={5} colEnd={5} rowStart={1} rowEnd={1} alignItems={'flex-end'}>
-              <Text fontSize={'10'}> {hts}</Text>
+              <Text fontSize={'12'}> {hts}</Text>
               <Text mt={'-0.5'} fontSize={'8'}> {dia} </Text></GridItem>
           </Grid>
         </Container>
 
       </HStack>
+      <Flex
+        w="100%"
+        
+        mb={2}
+        justifyContent="center"
+      >
+        {/* Checkbox para Completadas */}
+        <Checkbox
+          id="checkboxCompleted"
+          name="checkboxCompleted"
+          onChange={() => setShowCompleted(!showCompleted)}
+          isChecked={showCompleted}
+          ml={2}
+          {...checkboxProps}
+        >
+          Completadas
+        </Checkbox>
+
+        {/* Checkbox para Pendientes */}
+        <Checkbox
+          id="checkboxUncompleted"
+          name="checkboxUncompleted"
+          onChange={() => setShowUncompleted(!showUncompleted)}
+          isChecked={showUncompleted}
+          mr={2}
+          {...checkboxProps}
+        >
+          Pendientes
+        </Checkbox>
+      </Flex>
       <VStack minH={{ base: '30vh' }}>
         {/* Mensaje si no hay tareas */}
         {todos.length === 0 ? (
@@ -106,13 +160,10 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
             <Text fontSize={{ base: '8px', sm: '9px', md: '11px', lg: '12px' }}>Puede agregar o descansar.</Text>
           </Badge>
         ) : (
-          <Box w='96%' >
-            <Grid templateColumns='repeat(1 , 1fr)' >
-              {/* // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1 */}
-              {todos.map((todo) => (
-
+          <Box w='96%'>
+            <Grid templateColumns='repeat(1, 1fr)'>
+              {filteredTodos.map((todo) => (
                 <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
-
               ))}
             </Grid>
           </Box>
