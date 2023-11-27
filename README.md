@@ -59,8 +59,7 @@ $ cd ../ruta/al/archivo
 $ npm install
 $ npm run dev
 ```
-Corré los comandos en secuencia y no la cagues
-corta
+Corré los comandos en secuencia 
 
 ## Primeros Usos
 

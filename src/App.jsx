@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChakraProvider, VStack, IconButton } from '@chakra-ui/react';
+import { ChakraProvider, VStack, IconButton, HStack } from '@chakra-ui/react';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { Header } from './Components/Header/Header.jsx'
 import TaskList from './Components/TaskList/TaskList';
@@ -20,12 +20,45 @@ function App() {
     completed: false,
   },]
   
+   // Declaración del estado para almacenar la lista de tareas
+   const [todos, setTodos] = useState([]);
+
+  // LA PRUEBA
+
+   const [tarea,setTarea ] = useState([]);
+   const [actTareas,setActTareas] = useState(false);
+  
+   
+   useEffect(() => {
+     console.log('useEffect onload')
+ 
+     const tareas = JSON.parse(localStorage.getItem('tareas')) ?? [];
+     setTarea(tareas)
+     setTodos(tareas)
+ 
+   },[])
+   
+   useEffect(() => {
+     console.log('useEffect update tarea')
+ 
+     if(actTareas){
+       console.log('actualizar localstorage')
+       
+       localStorage.setItem('tareas',JSON.stringify(tarea));
+       setActTareas(false);
+     
+     }
+ 
+   },[tarea])
+
+
+
   // SECCION LOCALSTORAGE  <----------------------------------- !
 
-  // let pkgpara = localStorage.setItem("tarea", JSON.stringify(todos))
   // let pkgde = JSON.parse(localStorage.getItem("tarea", JSON.stringify(todos)))
+  // let pkgpara = localStorage.setItem("tarea", JSON.stringify(todos))
 
-  // 
+  
   // const traer = () => {
   //   pkgde? console.log({pkgde}) : console.log("No hay entradas")
   // }
@@ -34,8 +67,9 @@ function App() {
   //   pkgpara? console.log({pkgpara}) : console.log("Nada para enviar")
   // }
 
-  // Declaración del estado para almacenar la lista de tareas
-  const [todos, setTodos] = useState(initialTodos);
+
+
+ 
 
 
 
@@ -75,20 +109,19 @@ function App() {
     };
 
     setTodos([...todos, tareaConFecha]);
+    setTarea([...todos, tarea])
   }
 
   return (
     // Proveedor de diseño Chakra para estilos y componentes
     <ChakraProvider>
       {/* Contenedor principal con alineación y padding */}
-      {/* <VStack maxW={{base:'80vw' ,sm:'60vw', md:'50vw'}} p={4} alignItems="center"> */}
+      
       <VStack maxW={{ base: '82vw', sm: '60vw', md:'46vw', lg: '34vw', xl: '32vw' }} 
               minW={{ base: '75vw', sm: '46vw', md:'34vw', lg: '28vw', xl: '24vw' }}
       p={1} justifyContent={'center'}>
       
-        {/* Botón de sol con icono */}
-        {/* <IconButton icon={<FaSun />} isRound size='lg' alignSelf='flex-end' color="yellow.500" onClick={traer}/>
-        <IconButton icon={<FaMoon />} isRound size='lg' alignSelf='flex-end' color="yellow.500" onClick={mandar}/> */}
+        
         {/* Componente TaskList para mostrar la lista de tareas */}
         <TaskList todos={todos} handleTaskAction={handleTaskAction} agregarTarea={agregarTarea} />
       </VStack>

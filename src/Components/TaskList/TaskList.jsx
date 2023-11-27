@@ -68,16 +68,13 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
     // Contenedor principal de la lista de tareas
     <VStack
       spacing={0.5}
-      // divider={<StackDivider />}
-      
-      
       p="0"
       borderRadius="12px"
-      w="100%"
-      maxW={{ base: '90vw', sm: '80vw', md:'75vw', lg: '70vw', xl: '55vw' }}
+      w="96%"
+      maxW={{ base: '78vw', sm: '65vw', md:'42vw', lg: '30vw', xl: '28vw' }} 
+      minW={{ base: '72vw', sm: '42vw', md:'32vw', lg: '26vw', xl: '22vw' }}
       minH="50vh"
       alignItems="center"
-      justify={'space-around'}
       bg="gray.50"
       
       overflowY="auto"
@@ -86,7 +83,6 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
       <HStack w="100%" bg="rgb(255,31,91)" p="1" mb={'6'}>
         <Container color={'white'} maxH={'40px'} >
       {/* Un Grid para lograr la estructura y comportamiento deseado para el "header" de nuestra TDlist */}
-            {/* <Grid templateRows='repeat(1, 1fr)' templateColumns={{base:'repeat(5, 1fr)',md:'repeat(4, 1fr)',lg:'repeat(3, 1fr)'}}  */}
             <Grid templateRows='repeat(1, 1fr)' templateColumns='repeat(5, 1fr)' 
             fontFamily="Red Hat Display" alignItems={'center'} >
               <GridItem colSpan={1} colStart={1} colEnd={1} rowStart={1} >
@@ -94,7 +90,6 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
               <GridItem colSpan={1} colStart={2} colEnd={2} rowStart={1} textAlign={'initial'}>
                 <Text fontSize={'10'}>{mes}<Text mt={'-0.5'} fontSize={'9'}>{currentDate.getFullYear()}</Text></Text></GridItem>
               <GridItem colStart={5} colEnd={5} rowStart={1} rowEnd={1} alignItems={'flex-end'}>
-                {/* <Text fontSize={'10'}> {horas>11 ? horas -12 : horas}:{currentDate.getMinutes()}{horas>12?'pm':'am'}</Text> */}
                 <Text fontSize={'10'}> {hts}</Text>
                 <Text mt={'-0.5'}  fontSize={'8'}> {dia} </Text></GridItem>
             </Grid>
@@ -113,18 +108,15 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           </Badge>
         ) : (
 
-          <Grid templateColumns='repeat(1 , 1fr)'>
-          {/* // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1 */}
-          {todos.map((todo) => (
-            <GridItem>
-              <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
-            </GridItem>
-          ))}
+          <Grid templateColumns='repeat(1 , 1fr)' >
+            {/* // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1 */}
+            {todos.map((todo) => (
+              
+                <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
+             
+            ))}
           </Grid>   
-          // // Mapeo de cada tarea para mostrarla con el componente TaskItem v .1
-          // todos.map((todo) => (
-          //   <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
-          // ))
+          
         )}
       </VStack>
       {/* Componente TaskForm para agregar nuevas tareas */}

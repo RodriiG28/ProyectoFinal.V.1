@@ -90,25 +90,28 @@ function TaskItem({ todo, handleTaskAction, ts }) {
     // Renderizar el componente
     return (
         
-        <GridItem>
+        <GridItem maxW={{ base: '67vw', sm: '55vw', md:'30vw', lg: '24vw', xl: '22vw' }} 
+                minW={{ base: '60vw', sm: '36vw', md:'24vw', lg: '18vw', xl: '14vw' }}>
             <HStack
                 key={todo.id}
-                w="90%" // Ajuste en el ancho del Flex
+                w="100%" // Ajuste en el ancho del Flex
                 // gap={2}
                 alignSelf={'center'}
                 display={'flex'}
                 direction={'row'}
-                justify={'space-around'}
-                mx={3}>
-                <Box w={{base:'8%',sm:'16%'}} h={{base:'38',sm:'full'}} display={'flex'} 
+                justify={'center'}
+                alignContent={'center'}
+                alignItems={'center'}
+                >
+                <Box minW={{base:'8%',sm:'16%'}} h={{base:'38',sm:'full'}} display={'flex'} 
                 flexDir={{base:'column', sm:'row'}} alignSelf={'left'} mr={'2'}>
-                {/* <Box w={{base:'8',sm:'14'}} h={{base:'50',sm:'10'}} display={'flex'} flexDir={{base:'column', sm:'row'}}> */}
+                
 
                     <IconButton
                     icon={<FaEdit />}
-                    fontSize={{base:'11',sm:'13',md:'15'}}
+                    fontSize={{base:'11',sm:'12',md:'13'}}
                     variant="ghost"
-                    outlineOffset={-8}
+                    outlineOffset={-9}
                     mr={{base:'0',sm:'-3'}}
                     color="rgb(255,31,91)"
                     onClick={editedTitle.length > 2 ? handleDetailViewClick : handleEditClick}
@@ -116,9 +119,9 @@ function TaskItem({ todo, handleTaskAction, ts }) {
 
                     <IconButton
                         icon={<FaTrash />}
-                        fontSize={{base:'11',sm:'13',md:'15'}}
+                        fontSize={{base:'11',sm:'12',md:'13'}}
                         variant="ghost"
-                        outlineOffset={-8}
+                        outlineOffset={-9}
                         color={todo.completed?"rgba(255,31,91,0.85)":"rgba(255,31,91,0.35)"}
                         onClick={() => handleTaskAction(todo.id, 'delete')}
                         _hover={{bg:'transparent'}}
@@ -127,7 +130,7 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                 </Box>  
 
                 {isEditing ? ( // Modo de edición
-                <Box  w={{base:'80%',sm:'70%'}}>
+                <Box  minW={{base:'70%',sm:'65%'}} maxW={{base:'75%',sm:'75%'}}>
                     <Textarea
                         value={editedTitle}
                         onChange={(e) => setEditedTitle(e.target.value)}
@@ -138,15 +141,13 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                         fontSize={{base:'12',md:'13',lg:'14'}}
                         bg="transparent"
                         _placeholder={{ color: 'gray.500' }}
-                        //_focus={{ bg: 'gray.200', border: 'none' }}
-                        //border="none"
                         onKeyDown={handleKeyDown}
                         size="sm"
                         textAlign="left"
                     />
                 </Box>
                 ) : (  
-                <Box w={{base:'85%',sm:'75%'}}>    
+                <Box minW={{base:'70%',sm:'65%'}} maxW={{base:'75%',sm:'75%'}}>    
                     <Text 
                         textDecoration={todo.completed ? 'line-through' : 'none'}
                         textDecorationColor={todo.completed ? 'rgb(255,31,91)' : 'none'}
@@ -157,9 +158,6 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                         fontWeight="700"
                         fontSize={{base:'12',md:'13',lg:'14'}}
                         flex="1"
-                        w='full'
-                        // minW={{base:'110',sm:'120',md:'140',lg:'150'}}
-                        // maxW={{base:'140',sm:'150',md:'170',lg:'180'}}
                         overflowWrap="break-word"
                         onClick={() => handleTaskAction(todo.id, 'toggle')}
                         textAlign="left"
@@ -176,9 +174,7 @@ function TaskItem({ todo, handleTaskAction, ts }) {
 
                 <Box w="10%">
                     <Circle
-                        // size={{base:'14px',md:'18px'}}
                         size="18px"
-
                         bg={todo.completed ? 'rgb(255,31,91)' : 'gray.200'}
                         color={todo.completed ? 'white' : 'rgb(255,31,91)'}
                         fontSize="sm"
@@ -188,7 +184,6 @@ function TaskItem({ todo, handleTaskAction, ts }) {
                         onClick={handleCheckClick}
                         cursor="pointer"
                     >
-                        {/* <FaCheck size={{base:'4px',md:'8px'}}/> */}
                         <FaCheck size="10px"/>
                     </Circle>
                 </Box>    

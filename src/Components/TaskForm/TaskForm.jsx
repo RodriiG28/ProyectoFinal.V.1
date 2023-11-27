@@ -14,7 +14,7 @@ function TaskForm({ agregarTarea }) {
     e.preventDefault();
     // Validar que el contenido no esté vacío
     if (contenido.trim() === '') {
-      setError('Error, debe ingresar algo.');
+      setError('Error, debe ingresar una tarea.');
       return;
     }
 
@@ -53,6 +53,7 @@ function TaskForm({ agregarTarea }) {
           fontSize={'10px'}
           fontFamily={'Red Hat Display'}
           placeholder="Escriba algo"
+          overflowWrap="break-word"
           value={contenido}
           onChange={(e) => setContenido(e.target.value)}
           color="gray.500"
@@ -75,7 +76,7 @@ function TaskForm({ agregarTarea }) {
             cursor="pointer"
             onClick={handleSubmit}
           >
-            {/* <FaPlus h={{base:'2',md:'10'}}/> */}
+            
             <FaPlus size="10px"/>
           </Circle>
         </InputRightElement>
