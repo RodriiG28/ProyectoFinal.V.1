@@ -21,57 +21,7 @@ function App() {
   },]
   
    // Declaración del estado para almacenar la lista de tareas
-   const [todos, setTodos] = useState([]);
-
-  // LA PRUEBA
-
-   const [tarea,setTarea ] = useState([]);
-   const [actTareas,setActTareas] = useState(false);
-  
-   
-   useEffect(() => {
-     console.log('useEffect onload')
- 
-     const tareas = JSON.parse(localStorage.getItem('tareas')) ?? [];
-     setTarea(tareas)
-     setTodos(tareas)
- 
-   },[])
-   
-   useEffect(() => {
-     console.log('useEffect update tarea')
- 
-     if(actTareas){
-       console.log('actualizar localstorage')
-       
-       localStorage.setItem('tareas',JSON.stringify(tarea));
-       setActTareas(false);
-     
-     }
- 
-   },[tarea])
-
-
-
-  // SECCION LOCALSTORAGE  <----------------------------------- !
-
-  // let pkgde = JSON.parse(localStorage.getItem("tarea", JSON.stringify(todos)))
-  // let pkgpara = localStorage.setItem("tarea", JSON.stringify(todos))
-
-  
-  // const traer = () => {
-  //   pkgde? console.log({pkgde}) : console.log("No hay entradas")
-  // }
-   
-  // const mandar =() =>{
-  //   pkgpara? console.log({pkgpara}) : console.log("Nada para enviar")
-  // }
-
-
-
- 
-
-
+   const [todos, setTodos] = useState(initialTodos);
 
 
   // Efecto secundario para imprimir en la consola cuando la lista de tareas cambia
