@@ -1,18 +1,15 @@
-To Do List App
+#To Do List App
 
-Alumnos:
+##Alumnos:
 🚀 FRANCISCO AMADOR
 🔥 RODRIGO AVILA
 🧉 HERNAN BARBOZA
 🧉 IRIS AMARILLO
 
-To Do List App
+###To Do List App
 ![To do List App](image.png)
-Tu aplicación para mantenerte organizado.
 
-NPM Version
-Build Status
-Downloads Stats
+Tu aplicación para mantenerte organizado.
 
 Índice y Referencias
 Información General
@@ -21,11 +18,14 @@ Instalación
 Primeros Pasos
 Agradecimientos
 FAQs
-¡Gracias por usar To Do List App!
-Información General
 
-CFO Rodri: "ToDo List App es una aplicación simple para gestionar tus tareas diarias. Puedes agregar nuevas tareas, marcarlas como completadas, editar el contenido y eliminarlas de la lista."
-Tecnologías
+¡Gracias por usar To Do List App!
+
+
+#Información General
+
+##Tecnologías
+
 Conocimos, aprendimos y utilizamos:
 
 🚀 React: versión 18.2.0
@@ -34,16 +34,16 @@ Conocimos, aprendimos y utilizamos:
 🎬 Framer Motion: versión 10.16.5
 📦 GH-pages: versión 6.0.0
 🆔 NanoId: versión 5.0.3
-Capturas de Pantalla
-Captura de la Aplicación
 
-Características
+#Características
 Agregar Tareas: Añade nuevas tareas a tu lista.
 Marcar Tareas: Marca las tareas como completadas o pendientes.
 Editar Tareas: Modifica el contenido de tus tareas.
 Eliminar Tareas: Elimina las tareas que ya no necesitas.
 Fecha de Creación: Cada tarea muestra la fecha en que fue creada.
-Instalación
+
+#Instalación
+
 Si ya has utilizado GitHub anteriormente, los pasos son sencillos. Si no, aquí te acompañamos:
 
 bash
@@ -54,7 +54,7 @@ $ npm install
 $ npm run dev
 Corre estos comandos en secuencia.
 
-Primeros Pasos
+#Primeros Pasos
 Accede a la aplicación en tu navegador.
 Agrega nuevas tareas utilizando el formulario.
 Marca las tareas como completadas haciendo clic en el círculo junto a cada tarea o haciendo click en el texto.
@@ -63,22 +63,22 @@ Elimina una tarea haciendo clic en el ícono de basura.
 Filtra tus tareas completadas y Pendientes.
 ¡Listo! Ahora estás preparado para gestionar tus tareas de manera eficiente. 😉
 
-Agradecimientos
+#Agradecimientos
 Agradecemos a aquellos que contribuyeron al proyecto:
 
 ✔ Jose Luis Condori, nuestro docente.
 🧞 Pablo Rito, un compañero y constante consejero, ya un amigo.
 ¡Y a todos los que probaron y dieron feedback!
 FAQs
-¿Esto es gratis?
+#¿Esto es gratis?
 
 ¡Claro que sí! Para quien lo requiera y esperamos que lo disfruten. 😄
-¿Cómo les fue con este hermoso proyecto?
+###¿Cómo les fue con este hermoso proyecto?
 
 Disfrutamos el desafío y todo el proceso, con sus alegrías, frustraciones y sobre todo aprendizajes. Creemos que eso y una devolución constructiva ya son un gran logro.
 
 
 
 
-¡Gracias por usar To Do List App!
+#¡Gracias por usar To Do List App!
 Esperamos que To Do List App te ayude a mantener todo en orden. ¡No dudes en contactarnos para comentarios, sugerencias o si simplemente quieres decir hola! 😊

@@ -1,6 +1,5 @@
-import { Container, IconButton , useColorMode, Tooltip} from '@chakra-ui/react';
+import { Container} from '@chakra-ui/react';
 import React from 'react';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 
 const Header=()=>{
