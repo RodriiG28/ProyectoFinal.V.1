@@ -59,7 +59,6 @@ function App() {
     };
 
     setTodos([...todos, tareaConFecha]);
-    setTarea([...todos, tarea])
   }
 
   return (
