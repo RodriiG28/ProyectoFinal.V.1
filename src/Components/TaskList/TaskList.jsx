@@ -24,7 +24,7 @@ const trashIconSvg = (
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
     <path d="M4 7l16 0" />
     <path d="M10 11l0 6" />
-    path d="M14 11l0 6" />
+    <path d="M14 11l0 6" />
     <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
     <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
   </svg>
@@ -67,9 +67,9 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
   let mes = meses[currentDate.getMonth()];
   let dia = dias[currentDate.getDay()];
   let horas = currentDate.getHours();
-let amPm = horas >= 12 ? 'pm' : 'am';
-let hts = [(horas % 12 || 12), ":", min0, amPm];
-let tmstamp = [dts, "-", [currentDate.getUTCDate(), "/", currentDate.getUTCMonth() + 1, "/", currentDate.getUTCFullYear()], "- ", hts];
+  let amPm = horas >= 12 ? 'pm' : 'am';
+  let hts = [(horas % 12 || 12), ":", min0, amPm];
+  let tmstamp = [dts, "-", [currentDate.getUTCDate(), "/", currentDate.getUTCMonth() + 1, "/", currentDate.getUTCFullYear()], "- ", hts];
   //no permanente 
 
   // Obtener la fecha formateada
