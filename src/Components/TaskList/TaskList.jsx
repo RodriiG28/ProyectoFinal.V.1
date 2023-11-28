@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { VStack, Text, Badge, HStack, Container, Grid, GridItem, Box, Checkbox,Flex,useBreakpointValue } from '@chakra-ui/react';
+import { VStack, Text, Badge, HStack, Container, Grid, GridItem, Box, Checkbox, Flex, useBreakpointValue } from '@chakra-ui/react';
 import TaskItem from '../TaskItem/TaskItem';
 import TaskForm from '../TaskForm/TaskForm';
 import { GrStatusGood } from "react-icons/gr";
 import { PiBeerSteinBold } from "react-icons/pi";
 import { PiSmileyWinkBold } from "react-icons/pi";
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Icono de basurero representado como un componente SVG
 const trashIconSvg = (
@@ -31,7 +32,7 @@ const trashIconSvg = (
 
 function TaskList({ todos, handleTaskAction, agregarTarea }) {
   const [showCompleted, setShowCompleted] = useState(false);
-  const [showUncompleted, setShowUncompleted] = useState(false);
+  const [showUncompleted, setShowUncompleted] = useState(true);
 
   const filteredTodos = todos.filter((todo) => {
     if (showCompleted && showUncompleted) {
@@ -41,10 +42,10 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
     } else if (showUncompleted) {
       return !todo.completed;
     }
-    return true; // Si ambos checkboxes están desactivados, mostrar todas las tareas
+    return false; // Si ambos checkboxes están desactivados, no mostrar ninguna tarea
   });
 
-  
+
   // Obtener la fecha actual
   const currentDate = new Date();
   // no permanente  ----- Date time zone -----
@@ -79,16 +80,17 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
   }).format(currentDate);
 
   const checkboxProps = {
-    borderColor: 'red',
     fontFamily: 'Red Hat Display',
-    color: 'red',
     alignItems: 'center',
-    fontSize: useBreakpointValue({ base: '10px', sm: '12px', md: '14px' }),
-    marginX: useBreakpointValue({ base: 2, sm: 4, md: 6, lg: 8, xl: 10 }),
+    fontSize: useBreakpointValue({ base: '8px', sm: '10px', md: '12px', lg: '14px', xl: '16px' }),
+    marginX: useBreakpointValue({ base: 1, sm: 3, md: 2, lg: 2, xl: 8 }),
+    mt: useBreakpointValue({ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }),
+    mb: useBreakpointValue({ base: 2, sm: 2, md: 2, lg: 2, xl: 2 }),
   };
 
   return (
     // Contenedor principal de la lista de tareas
+
     <VStack
       spacing={0.5}
       p="0"
@@ -119,9 +121,10 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
         </Container>
 
       </HStack>
+
       <Flex
         w="100%"
-        
+
         mb={2}
         justifyContent="center"
       >
@@ -132,7 +135,12 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           onChange={() => setShowCompleted(!showCompleted)}
           isChecked={showCompleted}
           ml={2}
+          color='green.500'
+          borderColor='green.500'
+          iconColor='red.500' 
+          _focus={{ boxShadow: 'none' }}
           {...checkboxProps}
+
         >
           Completadas
         </Checkbox>
@@ -144,12 +152,15 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           onChange={() => setShowUncompleted(!showUncompleted)}
           isChecked={showUncompleted}
           mr={2}
+          borderColor='red.500'
+          color='red.500'
+          iconColor='red.500' 
           {...checkboxProps}
         >
           Pendientes
         </Checkbox>
       </Flex>
-      <VStack minH={{ base: '30vh' }}>
+      <VStack minH={{ base: '40vh' }}>
         {/* Mensaje si no hay tareas */}
         {todos.length === 0 ? (
           <Badge colorScheme="red" p="4" borderRadius="lg" fontFamily="Red Hat Display" alignSelf="center">
@@ -161,17 +172,30 @@ function TaskList({ todos, handleTaskAction, agregarTarea }) {
           </Badge>
         ) : (
           <Box w='96%'>
-            <Grid templateColumns='repeat(1, 1fr)'>
+            <AnimatePresence>
               {filteredTodos.map((todo) => (
-                <TaskItem ts={tmstamp} key={todo.id} todo={todo} handleTaskAction={handleTaskAction} />
+                <motion.div
+                  key={todo.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.3, delay: 0.1 }}
+                >
+                  <TaskItem ts={tmstamp} todo={todo} handleTaskAction={handleTaskAction} />
+                </motion.div>
               ))}
-            </Grid>
+            </AnimatePresence>
           </Box>
         )}
+
       </VStack>
       {/* Componente TaskForm para agregar nuevas tareas */}
       <TaskForm alignSelf={'end'} agregarTarea={agregarTarea} />
     </VStack>
+
+
+
   );
 }
 
